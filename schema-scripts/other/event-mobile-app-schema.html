@@ -3,38 +3,6 @@
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "WebPage",
-      "@id": "https://www.swapcard.com/event-mobile-app/#webpage",
-      "url": "https://www.swapcard.com/event-mobile-app/",
-      "name": "Best Event App - Fully-Customizable & Easy-to-Use | Swapcard",
-      "inLanguage": "en",
-      "description": "Simplify event management for onsite and hybrid events with Swapcard's intuitive event mobile app—designed to boost engagement and streamline operations.",
-      "isPartOf": {
-        "@id": "https://www.swapcard.com/#website"
-      },
-      "about": {
-        "@id": "https://www.swapcard.com/#org"
-      }
-    },
-    {
-      "@type": "BreadcrumbList",
-      "@id": "https://www.swapcard.com/event-mobile-app/#breadcrumb",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://www.swapcard.com/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Event Mobile App",
-          "item": "https://www.swapcard.com/event-mobile-app"
-        }
-      ]
-    },
-    {
       "@type": "Organization",
       "@id": "https://www.swapcard.com/#org",
       "name": "Swapcard",
@@ -93,9 +61,177 @@
       "url": "https://www.swapcard.com/",
       "name": "Swapcard",
       "inLanguage": "en",
-      "description": "Swapcard is an AI-powered event and community platform that helps organizers create engaging, data-driven experiences for attendees, exhibitors, and sponsors.",
+      "description": "Swapcard is an AI-powered event and community platform that helps organizers create engaging, data-driven experiences for attendees, exhibitors, and sponsors."
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://www.swapcard.com/event-mobile-app/#webpage",
+      "url": "https://www.swapcard.com/event-mobile-app",
+      "name": "Best Event App - Fully-Customizable & Easy-to-Use | Swapcard",
+      "inLanguage": "en",
+      "description": "Swapcard's mobile event app boosts engagement with personalized schedules, networking, lead capture, and interactive features for attendees, exhibitors, and sponsors."
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.swapcard.com/event-mobile-app/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.swapcard.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Event mobile app",
+          "item": "https://www.swapcard.com/event-mobile-app"
+        }
+      ]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://www.swapcard.com/event-mobile-app/#app",
+      "name": "Swapcard Event Mobile App",
+      "operatingSystem": "iOS, Android",
+      "applicationCategory": "BusinessApplication, MobileApplication",
+      "url": "https://www.swapcard.com/event-mobile-app",
+      "installUrl": [
+        "https://apps.apple.com/us/app/swapcard-smart-event-app/id879488719",
+        "https://play.google.com/store/apps/details?id=com.swapcard.apps.android"
+      ],
+      "description": "An AI-powered event app for personalized agendas, networking, lead capture, interactive sessions (polls, Q&A), and real-time updates across iOS and Android.",
+      "inLanguage": "en",
+      "mainEntityOfPage": {
+        "@id": "https://www.swapcard.com/event-mobile-app/#webpage"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.swapcard.com/event-mobile-app/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is Swapcard's event app?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It's a mobile event application that helps attendees, exhibitors, and sponsors engage through personalized agendas, networking, lead capture, and interactive features."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the Swapcard event mobile app used for?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It centralizes the attendee journey—discover sessions and exhibitors, connect with people, receive updates, scan leads, and access event content in one place."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the benefits of a mobile event app?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Higher engagement and ROI via tailored recommendations, real-time notifications, interactive tools (polls, Q&A), and data insights for organizers and exhibitors."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the Swapcard app available on iOS and Android?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The app is available on both the Apple App Store and Google Play Store."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is the Swapcard mobile app GDPR-compliant and secure?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Swapcard follows GDPR requirements and implements security best practices for data processing and access management."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can organizers track who checks into sessions or booths?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Check-ins and scans can be tracked to measure attendance and engagement across sessions and exhibitor booths."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do digital badges work offline or without Wi-Fi?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Digital badges display in the app once authenticated. Onsite verification and syncing typically require connectivity; organizers can use compatible check-in tools for offline-tolerant workflows."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How are access levels assigned to different badge types?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Organizers configure badge types and access rules in the event setup so that each attendee role unlocks the appropriate areas, sessions, or features."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How are session and networking recommendations generated?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Recommendations are powered by AI using attendee profiles, declared interests, and in-app behavior to surface relevant people, sessions, and exhibitors."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can attendees update their interests or preferences in the app?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Attendees can edit their profiles and preferences to refine recommendations and networking matches."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What elements of the app can be personalized for our event?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Branding, theming, navigation, featured content, and feature modules can be tailored to your event to deliver a consistent, branded experience."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can we publish the app under our own name in the app stores?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Swapcard supports branded apps published under your own Apple and Google developer accounts."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How can I use the event app to boost engagement?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Use personalized agendas, push notifications, polls, Q&A, gamification, and smart recommendations to drive participation before, during, and after the event."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "VideoObject",
+      "@id": "https://www.swapcard.com/event-mobile-app/#video-gl-events",
+      "name": "GL Events' GreenTech+: Driving Exhibitor ROI with Digital Engagement",
+      "description": "Discover how GL Events used Swapcard's event app to track visitors, manage booth traffic, and boost exhibitor ROI with direct engagement.",
+      "thumbnailUrl": "https://embed-ssl.wistia.com/deliveries/377579aa50ead9e79a1a9e8374ec2835.jpg?image_crop_resized=640x360",
+      "uploadDate": "2025-07-01T13:51:06+00:00",
+      "contentUrl": "https://embed-ssl.wistia.com/deliveries/488f1dadc3dc3f1760e6c59017f73208be9f1dde.m3u8",
+      "embedUrl": "https://fast.wistia.net/embed/iframe/on1wfuly5i?wseektoaction=true",
       "publisher": {
-        "@id": "https://www.swapcard.com/#org"
+        "@type": "Organization",
+        "name": "Swapcard",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://cdn.prod.website-files.com/6341448fda79c92372b010a4/63502c47c8e7bdfa7c25aefe_swapcardLogo.svg"
+        }
       }
     }
   ]
