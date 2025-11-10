@@ -5,9 +5,11 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// All your pages data from Webflow
+// Pages demandées par l'agence SEO + toutes les pages Solutions, Platform et Features
+// Source: CLIENT_SCHEMA_INSTRUCTIONS copy.md et NOTION.md
+// Total: 8 pages explicites + 12 Solutions + 2 Platform + 20 Features = 42 pages
 const pages = [
-  // Homepage
+  // 1. Homepage (Section 4.1)
   {
     id: "66e7f7664c809e76fa704d87",
     title: "Home",
@@ -21,13 +23,51 @@ const pages = [
     publishedPath: "/",
     category: "homepage",
   },
-  // Features
+  // 2. Event Mobile App (Section 4.2 - Product Page)
+  {
+    id: "64d3914e6761bd389818d68f",
+    title: "Mobile App",
+    slug: "event-mobile-app",
+    seo: {
+      title: "Best Event App - Fully-Customizable & Easy-to-Use | Swapcard",
+      description:
+        "Simplify event management for onsite and hybrid events with Swapcard's intuitive event mobile app—designed to boost engagement and streamline operations.",
+    },
+    publishedPath: "/event-mobile-app",
+    category: "other",
+  },
+  // 3. Event Registration Software (Section 4.2 - Product Page example)
+  {
+    id: "67bc912ad5449e905149a5a6",
+    title: "Registration, Ticketing, Payments",
+    slug: "event-registration-software",
+    seo: {
+      title: "All-in-One Event Registration Software Solutions | Swapcard",
+      description:
+        "Sell more tickets and drive attendance with Swapcard's event registration software. Discover how to deliver a seamless, easy-to-use experience for all.",
+    },
+    publishedPath: "/features/event-registration-software",
+    category: "features",
+  },
+  // Features pages - toutes les pages Features publiées (Section 4.2 - Product Pages)
+  {
+    id: "6902017bf1c2449738b08fed",
+    title: "Home Page Builder",
+    slug: "event-homepage-builder",
+    seo: {
+      title: "Build branded event homepages that convert | Swapcard",
+      description:
+        "Design high-converting, mobile-ready event homepages. Customize content, target by audience, and prove ROI to exhibitors & sponsors.",
+    },
+    publishedPath: "/features/event-homepage-builder",
+    category: "features",
+  },
   {
     id: "68e62f6fe945f2613fc768a1",
     title: "Networking & Matchmaking Software",
     slug: "event-networking",
     seo: {
-      title: "Smart Event Networking & Lead Matchmaking | Swapcard",
+      title: "Smart Event Networking & Matchmaking Software | Swapcard",
       description:
         "Drive quality meetings & real ROI. Use AI to match attendees, manage meetings, and track engagement in real-time at any event scale.",
     },
@@ -47,6 +87,30 @@ const pages = [
     category: "features",
   },
   {
+    id: "68a341e1a1a65d968b59fef3",
+    title: "Onsite control access & checkpoints",
+    slug: "onsite-control-access-checkpoints",
+    seo: {
+      title: "Onsite control access & checkpoints",
+      description:
+        "Power your events with Swapcard's Hosted Buyer Software. Automate B2B matchmaking, scheduling, and ROI tracking. Request a personalized demo today.",
+    },
+    publishedPath: "/features/onsite-control-access-checkpoints",
+    category: "features",
+  },
+  {
+    id: "68a2fe30a392c76e4ce47509",
+    title: "Hosted Buyer Software",
+    slug: "hosted-buyer-software",
+    seo: {
+      title: "Swapcard Hosted Buyer Software | Smart Matchmaking & ROI",
+      description:
+        "Power your events with Swapcard's Hosted Buyer Software. Automate B2B matchmaking, scheduling, and ROI tracking. Request a personalized demo today.",
+    },
+    publishedPath: "/features/hosted-buyer-software",
+    category: "features",
+  },
+  {
     id: "689db002711b2ed50f7f5484",
     title: "Exhibitors & Sponsors",
     slug: "exhibitor-sponsor-tools",
@@ -59,15 +123,27 @@ const pages = [
     category: "features",
   },
   {
-    id: "6874d8491f6116aee4371add",
-    title: "Attendee Engagement",
-    slug: "attendee-engagement-software",
+    id: "689c67af9eca6b3a4586d93a",
+    title: "Event Content & Session Management",
+    slug: "event-content-session-management",
     seo: {
-      title: "Attendee engagement software for Trade Show & Association Events",
+      title: "Event Content & Session Management Platform | Swapcard",
       description:
-        "Boost attendee engagement before, during, and after your event with Swapcard. From AI-powered networking to interactive sessions and real-time chat, create meaningful experiences that deliver ROI.",
+        "Discover Swapcard's event content management tools to streamline session planning, speaker coordination, and attendee engagement. Live, hybrid, or virtual.",
     },
-    publishedPath: "/features/attendee-engagement-software",
+    publishedPath: "/features/event-content-session-management",
+    category: "features",
+  },
+  {
+    id: "689b5389af599fb23c01b0f2",
+    title: "Event Branding & Communication",
+    slug: "event-branding-communication-tools",
+    seo: {
+      title: " Branding & Communication Tools for Events | Swapcard",
+      description:
+        "Control your brand across each touchpoint—homepage, app, emails, and more. Event organizers use Swapcard to create immersive experiences that boost engagement.",
+    },
+    publishedPath: "/features/event-branding-communication-tools",
     category: "features",
   },
   {
@@ -83,15 +159,99 @@ const pages = [
     category: "features",
   },
   {
-    id: "67bc912ad5449e905149a5a6",
-    title: "Registration, Ticketing, Payments",
-    slug: "event-registration-software",
+    id: "6874d8491f6116aee4371add",
+    title: "Attendee Engagement",
+    slug: "attendee-engagement-software",
     seo: {
-      title: "All-in-One Event Registration Software Solutions | Swapcard",
+      title: "Attendee engagement software for Trade Show & Association Events",
       description:
-        "Sell more tickets and drive attendance with Swapcard's event registration software. Discover how to deliver a seamless, easy-to-use experience for all.",
+        "Boost attendee engagement before, during, and after your event with Swapcard. From AI-powered networking to interactive sessions and real-time chat, create meaningful experiences that deliver ROI.",
     },
-    publishedPath: "/features/event-registration-software",
+    publishedPath: "/features/attendee-engagement-software",
+    category: "features",
+  },
+  {
+    id: "66f419b2542cc239b4feb045",
+    title: "Private & Limited Sessions",
+    slug: "private-and-limited-sessions",
+    seo: {
+      title: "Exclusive Private & Limited Access Sessions | Swapcard",
+      description:
+        "Offer exclusive, secure access to high-value content with Swapcard's private sessions. Control permissions and track attendee engagement with ease! Contact us!",
+    },
+    publishedPath: "/features/private-and-limited-sessions",
+    category: "features",
+  },
+  {
+    id: "66f4199895ceaa8b1269f631",
+    title: "Backstage",
+    slug: "backstage",
+    seo: {
+      title: "Smooth Virtual Event Management and Hosting with Backstage",
+      description:
+        "Ensure smooth virtual event experiences with Swapcard's Backstage! Manage speakers, collaborate in real-time, and deliver professional sessions. Contact!",
+    },
+    publishedPath: "/features/backstage",
+    category: "features",
+  },
+  {
+    id: "66f4197ee578b51bfa28bcb6",
+    title: "AI / Personalized recommendations",
+    slug: "ai-personalized-recomendations",
+    seo: {
+      title: "AI-Driven Personalized Event Recommendations | Swapcard",
+      description:
+        "Enhance event engagement with Swapcard's AI-powered recommendations. Deliver personalized networking, exhibitor & session suggestions to attendees. Contact us!",
+    },
+    publishedPath: "/features/ai-personalized-recomendations",
+    category: "features",
+  },
+  {
+    id: "66f419697ff56e5321863a23",
+    title: "Meeting Request Rules",
+    slug: "meeting-request-rules",
+    seo: {
+      title: "Flexible Event Meeting Management Tools | Swapcard",
+      description:
+        "Simplify networking with Swapcard's meeting request tools! Customize schedules, set meeting rules, and enhance meaningful connections. Contact us for more!",
+    },
+    publishedPath: "/features/meeting-request-rules",
+    category: "features",
+  },
+  {
+    id: "66f418f39f550d1cfa4c2c1d",
+    title: "Onsite self check-in & Badge Printing",
+    slug: "event-check-in-app",
+    seo: {
+      title: "Event Check-In App for Fast Entry & Smart Badge Printing",
+      description:
+        " Enhance attendee flow with Swapcard's onsite event check-in app. Reduce registration wait times, manage badge printing, and track attendance live effortlessly.",
+    },
+    publishedPath: "/features/event-check-in-app",
+    category: "features",
+  },
+  {
+    id: "66f418b733d27c6d1272dfc6",
+    title: "Lead Qualification",
+    slug: "lead-qualification",
+    seo: {
+      title: "Maximize Exhibitor ROI with Lead Qualification Tools | Swapcard",
+      description:
+        "Boost exhibitor success with Swapcard's lead qualification tools! Prioritize high-value leads and increase event conversion rates effectively. Contact us",
+    },
+    publishedPath: "/features/lead-qualification",
+    category: "features",
+  },
+  {
+    id: "66f417aa357293565ccf30ed",
+    title: "Lead Capture",
+    slug: "lead-capture",
+    seo: {
+      title: "Streamline Lead Capture with User-Friendly Software | Swapcard",
+      description:
+        "Simplify lead capture at events! Automate lead collection, qualify prospects, and help exhibitors boost their ROI with Swapcard's smart booth management tool.",
+    },
+    publishedPath: "/features/lead-capture",
     category: "features",
   },
   {
@@ -114,84 +274,12 @@ const pages = [
       title:
         "Swapcard Widgets | The easiest way to boost your event's online presence",
       description:
-        "Boost engagement with Swapcard's interactive widgets. Enhance interactivity, track analytics & optimize networking for a seamless event experience.",
+        "Boost engagement with Swapcard's interactive widgets. Enhance interactivity, track analytics & optimize networking for a seamless event experience. ",
     },
     publishedPath: "/features/widgets",
     category: "features",
   },
-  // Solutions
-  {
-    id: "66e99790dc4385c4ad401bc7",
-    title: "Community",
-    slug: "event-management-software-communities",
-    seo: {
-      title: "Event Management Software for Communities | Swapcard",
-      description:
-        "Plan and manage successful events with Swapcard's powerful event planning and management software platform, perfect for small business event organizers.",
-    },
-    publishedPath: "/solutions/event-management-software-communities",
-    category: "solutions",
-  },
-  {
-    id: "66e99755ed760ab19d1599ef",
-    title: "Associations",
-    slug: "association-event-management-software",
-    seo: {
-      title: "Event Management Software for Associations | Swapcard",
-      description:
-        "Boost member retention & engagement with Swapcard's event software for associations. Simplify admin tasks, manage CE tracking & enhance networking. Contact us!",
-    },
-    publishedPath: "/solutions/association-event-management-software",
-    category: "solutions",
-  },
-  {
-    id: "66e995c1b8f5bd103d6f3235",
-    title: "Trade Show Exhibitions",
-    slug: "trade-show-management-software",
-    seo: {
-      title: "Trade Show & Exhibition Management Software | Swapcard",
-      description:
-        "Optimize trade shows with Swapcard's event lead retrieval and exhibitor lead capture tools. Enhance engagement and streamline event planning seamlessly.",
-    },
-    publishedPath: "/solutions/trade-show-management-software",
-    category: "solutions",
-  },
-  {
-    id: "66e995f2a407c7d071d41e58",
-    title: "B2B Conferences",
-    slug: "conference-management-software",
-    seo: {
-      title: "Conference Management Software | Swapcard",
-      description:
-        "Manage events with ease using Swapcard's event management & ticketing software. Simplify registration, ticketing, & on-site check-ins for a seamless experience.",
-    },
-    publishedPath: "/solutions/conference-management-software",
-    category: "solutions",
-  },
-  {
-    id: "66e99631e877433f6a8a35db",
-    title: "Congress/Medical Conferences",
-    slug: "healthcare-event-management-software",
-    seo: {
-      title: "Healthcare Event Management Software | Swapcard",
-      description:
-        "Enhance your medical congress with our event management software, featuring interactive tools, automated CME tracking, and tailored exhibitor solutions.",
-    },
-    publishedPath: "/solutions/healthcare-event-management-software",
-    category: "solutions",
-  },
-  {
-    id: "66e9976c4e70ed8150171062",
-    title: "Media Company",
-    slug: "media-company-event-management-software",
-    seo: {
-      title: "Event Management for Media Companies | Swapcard",
-      description:
-        "Discover event management software for media companies. Create engaging experiences with multimedia, polls, and live chat. Maximize revenue with targeted ads.",
-    },
-    publishedPath: "/solutions/media-company-event-management-software",
-    category: "solutions",
-  },
+  // 4. Attendee Networking & Engagement (Section 4.3 - Solution Page)
   {
     id: "66e994786b991285d48b518b",
     title: "Increase Attendee Networking & Engagement",
@@ -202,6 +290,19 @@ const pages = [
         "Boost attendee networking and engagement with tailored event journeys, AI-recommended connections, and interactive content to drive participation.",
     },
     publishedPath: "/solutions/attendee-networking-engagement",
+    category: "solutions",
+  },
+  // Solutions pages - toutes les pages Solutions publiées
+  {
+    id: "66e9945275d89bf37186d1ec",
+    title: "Modernize Registration & Onsite Access",
+    slug: "registration-and-onsite-access",
+    seo: {
+      title: "Modernize Registration & Onsite Access | Swapcard",
+      description:
+        "Use Swapcard's event registration software to streamline attendee check-ins, print badges onsite, and manage registrations with ease. Try our platform now!",
+    },
+    publishedPath: "/solutions/registration-and-onsite-access",
     category: "solutions",
   },
   {
@@ -241,70 +342,90 @@ const pages = [
     category: "solutions",
   },
   {
-    id: "66e9945275d89bf37186d1ec",
-    title: "Modernize Registration & Onsite Access",
-    slug: "registration-and-onsite-access",
+    id: "66e9959cad573484bc24cb50",
+    title: "Professional Services",
+    slug: "professional-services",
     seo: {
-      title: "Modernize Registration & Onsite Access | Swapcard",
+      title: "Event Professional Services for Seamless Event Management",
       description:
-        "Use Swapcard's event registration software to streamline attendee check-ins, print badges onsite, and manage registrations with ease. Try our platform now!",
+        "Leverage Swapcard for seamless professional services events. From planning to post-event analysis, receive expert support tailored to your needs.",
     },
-    publishedPath: "/solutions/registration-and-onsite-access",
+    publishedPath: "/solutions/professional-services",
     category: "solutions",
   },
-  // Resources
   {
-    id: "66e1ca28882059be449bbca4",
-    title: "Resource Center",
-    slug: "resources",
+    id: "66e995c1b8f5bd103d6f3235",
+    title: "Trade Show Exhibitions",
+    slug: "trade-show-management-software",
     seo: {
-      title: "Download Free Event Resources & Stay on Top of Trends | Swapcard",
+      title: "Trade Show & Exhibition Management Software | Swapcard",
       description:
-        "Access free event industry resources with Swapcard. Download guides, case studies & expert insights to optimize event strategies & stay ahead of trends.",
+        "Optimize trade shows with Swapcard's event lead retrieval and exhibitor lead capture tools. Enhance engagement and streamline event planning seamlessly.",
     },
-    publishedPath: "/resources",
-    category: "resources",
+    publishedPath: "/solutions/trade-show-management-software",
+    category: "solutions",
   },
   {
-    id: "6881fbb53d89795aa8980171",
-    title: "State of Event Engagement Report- Volume 2",
-    slug: "state-of-event-engagement-report-volume-2",
+    id: "66e995f2a407c7d071d41e58",
+    title: "B2B Conferences",
+    slug: "conference-management-software",
     seo: {
-      title:
-        "State of Event Engagement Vol. 2 | Insights for Trade Shows & Associations ",
+      title: "Conference Management Software | Swapcard",
       description:
-        "Get insights from 1,100+ trade show and association events with 6 million attendees. Learn about emerging trends in AI, networking, engagement & revenue growth.",
+        "Manage events with ease using Swapcard's event management & ticketing software. Simplify registration, ticketing, & on-site check-ins for a seamless experience.",
     },
-    publishedPath: "/resources/state-of-event-engagement-report-volume-2",
-    category: "resources",
+    publishedPath: "/solutions/conference-management-software",
+    category: "solutions",
   },
   {
-    id: "68e38cf84c9b7703e56b774f",
-    title: "Sales & Marketing Team Executive Playbook for Engagement & Revenue",
-    slug: "sales-marketing-teams-executive-playbook-engagement-roi",
+    id: "66e99631e877433f6a8a35db",
+    title: "Congress/Medical Conferences",
+    slug: "healthcare-event-management-software",
     seo: {
-      title: "Executive Playbook: Boost event revenue & engagement for leaders",
+      title: "Healthcare Event Management Software | Swapcard",
       description:
-        "Discover how sales & marketing directors monetize digital leads, drive engagement, and accelerate renewals with proven event growth strategies.",
+        "Enhance your medical congress with our event management software, featuring interactive tools, automated CME tracking, and tailored exhibitor solutions.",
     },
-    publishedPath:
-      "/resources/sales-marketing-teams-executive-playbook-engagement-roi",
-    category: "resources",
+    publishedPath: "/solutions/healthcare-event-management-software",
+    category: "solutions",
   },
   {
-    id: "64d3914e6761bd389818d71a",
-    title: "Media Kit & newsroom",
-    slug: "media-kit",
+    id: "66e99755ed760ab19d1599ef",
+    title: "Associations",
+    slug: "association-event-management-software",
     seo: {
-      title:
-        "Swapcard Media Kit & Newsroom - Logos, Product Images, Collateral & News",
+      title: "Event Management Software for Associations | Swapcard",
       description:
-        "Discover our comprehensive media kit, designed to provide event organizers and professionals with everything they need to promote our brand at their next event.",
+        "Boost member retention & engagement with Swapcard's event software for associations. Simplify admin tasks, manage CE tracking & enhance networking. Contact us!",
     },
-    publishedPath: "/resources/media-kit",
-    category: "resources",
+    publishedPath: "/solutions/association-event-management-software",
+    category: "solutions",
   },
-  // Platform
+  {
+    id: "66e9976c4e70ed8150171062",
+    title: "Media Company",
+    slug: "media-company-event-management-software",
+    seo: {
+      title: "Event Management for Media Companies | Swapcard",
+      description:
+        "Discover event management software for media companies. Create engaging experiences with multimedia, polls, and live chat. Maximize revenue with targeted ads.",
+    },
+    publishedPath: "/solutions/media-company-event-management-software",
+    category: "solutions",
+  },
+  {
+    id: "66e99790dc4385c4ad401bc7",
+    title: "Community",
+    slug: "event-management-software-communities",
+    seo: {
+      title: "Event Management Software for Communities | Swapcard",
+      description:
+        "Plan and manage successful events with Swapcard's powerful event planning and management software platform, perfect for small business event organizers.",
+    },
+    publishedPath: "/solutions/event-management-software-communities",
+    category: "solutions",
+  },
+  // Platform pages
   {
     id: "66f17f4840b674b2c9513e3f",
     title: "Platform Overview",
@@ -319,78 +440,17 @@ const pages = [
   },
   {
     id: "67375048f0ff43d64b4f5ed2",
-    title: "⚙️ Integrations Template",
+    title: "Integrations",
     slug: "integrations",
     seo: {
-      title: "Swapcard Integrations | Connect Salesforce, Cvent & More",
+      title: "Integrations | Swapcard",
       description:
         "Automate event management with Swapcard's software integrations. Connect with Salesforce, Cvent & top event tech tools for seamless operations. Contact us!",
     },
     publishedPath: "/platform/integrations",
     category: "platform",
   },
-  {
-    id: "64d3914e6761bd389818d742",
-    title: "Security",
-    slug: "security",
-    seo: {
-      title: "Security | At the Forefront of Our Innovation at Swapcard",
-      description:
-        "Swapcard holds 2022 SOC 2 Type 2 certification, ensuring the highest industry security standards for data protection and compliance. Contact us for more!",
-    },
-    publishedPath: "/platform/security",
-    category: "platform",
-  },
-  // Legal
-  {
-    id: "672cd0319cb5cfa43c1f1d3c",
-    title: "Privacy Policy",
-    slug: "privacy-policy",
-    seo: {
-      title: "Privacy Policy | Swapcard - Your Data, Your Rights",
-      description:
-        "Read Swapcard's privacy policy to understand how we collect, use, and protect your personal information, ensuring transparency and your data rights.",
-    },
-    publishedPath: "/legal/privacy-policy",
-    category: "legal",
-  },
-  {
-    id: "672cb0008e5b4edebd664df9",
-    title: "Terms user",
-    slug: "terms-user",
-    seo: {
-      title: "Terms and Conditions for Users there Rights | Swapcard",
-      description:
-        "Read the terms and conditions for users on Swapcard, detailing your rights and responsibilities while using our event management platform.",
-    },
-    publishedPath: "/legal/terms-user",
-    category: "legal",
-  },
-  {
-    id: "64d3914e6761bd389818d763",
-    title: "Terms organizer",
-    slug: "terms-organizer",
-    seo: {
-      title: "Organizer Terms & Conditions | Swapcard - Event Made Easy ",
-      description:
-        "Review Swapcard's terms for event organizers. Learn your rights and responsibilities to ensure a seamless and successful event experience. Contact us for more!",
-    },
-    publishedPath: "/legal/terms-organizer",
-    category: "legal",
-  },
-  // Other important pages
-  {
-    id: "66f2815f414fd64ce7d60b04",
-    title: "Pricing",
-    slug: "pricing-plans",
-    seo: {
-      title: "Swapcard Pricing | Flexible Plans for Every Event Type",
-      description:
-        "Explore Swapcard's pricing options and choose the perfect event engagement solution for your needs. Get started with affordable plans today!",
-    },
-    publishedPath: "/pricing-plans",
-    category: "other",
-  },
+  // 5. Blog (Section 4.4 - Blog Hub Page)
   {
     id: "66ec1e5ff5409890427adeab",
     title: "Blog",
@@ -403,30 +463,20 @@ const pages = [
     publishedPath: "/blog",
     category: "other",
   },
+  // 6. Pricing (Section 4.6 - Pricing Page)
   {
-    id: "64d3914e6761bd389818d675",
-    title: "Contact Us",
-    slug: "contact",
+    id: "66f2815f414fd64ce7d60b04",
+    title: "Pricing",
+    slug: "pricing-plans",
     seo: {
-      title: "Contact Us | Let's talk!",
+      title: "Swapcard Pricing | Flexible Plans for Every Event Type",
       description:
-        "Have a question or suggestion? Contact the Swapcard team anytime—we're here to help with your event needs & platform support. Contact us for more information!",
+        "Explore Swapcard's pricing options and choose the perfect event engagement solution for your needs. Get started with affordable plans today!",
     },
-    publishedPath: "/contact",
+    publishedPath: "/pricing-plans",
     category: "other",
   },
-  {
-    id: "64d3914e6761bd389818d677",
-    title: "Schedule Live Demo",
-    slug: "contact-us",
-    seo: {
-      title: "Schedule a Live Demo and Experience Swapcard's Platform",
-      description:
-        "Get a custom demo to explore how Swapcard's intuitive platform and AI-powered capabilities help enhance attendee engagement and exhibitor ROI, and grow revenue.",
-    },
-    publishedPath: "/contact-us",
-    category: "other",
-  },
+  // 7. About Swapcard (Section 4.7 - About Page)
   {
     id: "64d3914e6761bd389818d665",
     title: "About us",
@@ -439,28 +489,17 @@ const pages = [
     publishedPath: "/about-swapcard",
     category: "other",
   },
+  // 8. Authors (Section 4.9 - Author Hub Page)
   {
-    id: "64d3914e6761bd389818d66f",
-    title: "Careers",
-    slug: "careers",
+    id: "66eaf51f50a4fd43177de8f5",
+    title: "Authors",
+    slug: "authors",
     seo: {
-      title: "Join a Talented Team and Improve the Events Industry",
+      title: "Authors | Swapcard",
       description:
-        "Work from anywhere with Swapcard! Spread across 28 countries, we offer a flexible, comfortable work environment that supports remote and global collaboration.",
+        "Explore all Swapcard authors and their latest articles on event technology, attendee engagement, and ROI.",
     },
-    publishedPath: "/careers",
-    category: "other",
-  },
-  {
-    id: "64d3914e6761bd389818d68f",
-    title: "Mobile App",
-    slug: "event-mobile-app",
-    seo: {
-      title: "Best Event App - Fully-Customizable & Easy-to-Use | Swapcard",
-      description:
-        "Simplify event management for onsite and hybrid events with Swapcard's intuitive event mobile app—designed to boost engagement and streamline operations.",
-    },
-    publishedPath: "/event-mobile-app",
+    publishedPath: "/authors",
     category: "other",
   },
 ];
@@ -591,6 +630,9 @@ function getWebPageType(page) {
   if (page.publishedPath === "/blog") {
     return "CollectionPage";
   }
+  if (page.publishedPath === "/authors") {
+    return "CollectionPage";
+  }
   if (page.publishedPath === "/about-swapcard") {
     return "AboutPage";
   }
@@ -702,6 +744,29 @@ function getSchemaType(page) {
         },
       };
 
+    case "platform":
+      // Platform pages use Service (similar to Solutions)
+      return {
+        "@type": "Service",
+        "@id": `https://www.swapcard.com${page.publishedPath}#service`,
+        name: page.title,
+        serviceType: "Event Engagement Platform",
+        url: getPageUrl(page.publishedPath),
+        description: page.seo.description,
+        brand: { "@id": "https://www.swapcard.com/#org" },
+        provider: { "@id": "https://www.swapcard.com/#org" },
+        areaServed: "Worldwide",
+        availableChannel: {
+          "@type": "ServiceChannel",
+          serviceUrl: "https://www.swapcard.com/",
+          availableLanguage: ["en"],
+        },
+        audience: {
+          "@type": "BusinessAudience",
+          name: "Event organizers, associations, trade show & conference teams",
+        },
+      };
+
     case "resources":
       return {
         "@type": "Article",
@@ -756,6 +821,18 @@ function getAdditionalSchemas(page) {
           },
         },
       ],
+    });
+  }
+
+  // Authors page: Add ItemList (as per section 4.9)
+  if (page.publishedPath === "/authors") {
+    additionalSchemas.push({
+      "@type": "ItemList",
+      "@id": `https://www.swapcard.com${page.publishedPath}#itemlist`,
+      name: "Swapcard Authors",
+      itemListOrder: "https://schema.org/ItemListOrderAscending",
+      numberOfItems: 0, // Will be updated when authors are added
+      itemListElement: [], // Empty for now - will be populated when authors are added
     });
   }
 
@@ -838,6 +915,13 @@ function generatePageSchema(page) {
     ];
   }
 
+  // Add mainEntity for Authors page (CollectionPage pointing to ItemList)
+  if (page.publishedPath === "/authors") {
+    webPageSchema.mainEntity = {
+      "@id": `https://www.swapcard.com${page.publishedPath}#itemlist`,
+    };
+  }
+
   schema["@graph"].push(webPageSchema);
 
   // 2. Add breadcrumb if not homepage
@@ -908,16 +992,196 @@ ${JSON.stringify(schema, null, 2)}
 
 console.log("\n🎉 All schema files generated successfully!\n");
 console.log("📊 Summary:");
-console.log(`- Total pages: ${pages.length}`);
-console.log(`- Homepage: 1 (with VideoObject)`);
-console.log(`- Features: 9 (Product schema with brand)`);
-console.log(`- Solutions: 10 (Service schema)`);
-console.log(`- Resources: 4 (Article schema)`);
-console.log(`- Platform: 3`);
-console.log(`- Legal: 3`);
-console.log(`- Other: 6`);
-console.log(`  - Event Mobile App: SoftwareApplication`);
-console.log(`  - Blog: CollectionPage with keywords`);
-console.log(`  - Pricing: Product + OfferCatalog`);
-console.log(`  - About: AboutPage`);
+console.log(
+  `- Total pages: ${pages.length} (8 pages demandées par l'agence SEO)`
+);
+console.log(`- Homepage: 1 (WebPage + VideoObject)`);
+console.log(`- Event Mobile App: 1 (SoftwareApplication)`);
+console.log(`- Event Registration Software: 1 (Product)`);
+console.log(`- Attendee Networking & Engagement: 1 (Service)`);
+console.log(`- Blog: 1 (CollectionPage with keywords)`);
+console.log(`- Pricing: 1 (Product + OfferCatalog)`);
+console.log(`- About Swapcard: 1 (AboutPage)`);
+console.log(`- Authors: 1 (CollectionPage + ItemList)`);
 console.log("\n✨ Ready to copy-paste into Webflow!\n");
+
+// ============================================================================
+// UTILITY FUNCTIONS (Optional - uncomment if needed)
+// ============================================================================
+
+/**
+ * Analyze SEO Agency Requirements
+ * Compare pages in script with pages explicitly mentioned by SEO agency
+ * Usage: Uncomment and call analyzeSEOAgencyRequirements()
+ */
+function analyzeSEOAgencyRequirements() {
+  const seoAgencyRequestedPages = [
+    {
+      url: "/",
+      title: "Home",
+      type: "Homepage",
+      schemaType: "WebPage + VideoObject",
+    },
+    {
+      url: "/event-mobile-app",
+      title: "Event Mobile App",
+      type: "Product Page (Feature)",
+      schemaType: "SoftwareApplication",
+    },
+    {
+      url: "/features/event-registration-software",
+      title: "Event Registration Software",
+      type: "Product Page (Feature)",
+      schemaType: "Product",
+    },
+    {
+      url: "/solutions/attendee-networking-engagement",
+      title: "Attendee Networking & Engagement",
+      type: "Solution Page",
+      schemaType: "Service",
+    },
+    {
+      url: "/blog",
+      title: "Blog",
+      type: "Blog Hub Page",
+      schemaType: "CollectionPage",
+    },
+    {
+      url: "/pricing-plans",
+      title: "Pricing",
+      type: "Pricing Page",
+      schemaType: "Product + OfferCatalog",
+    },
+    {
+      url: "/about-swapcard",
+      title: "About Swapcard",
+      type: "About Page",
+      schemaType: "AboutPage",
+    },
+    {
+      url: "/authors",
+      title: "Authors",
+      type: "Author Hub Page",
+      schemaType: "CollectionPage + ItemList",
+    },
+  ];
+
+  const foundPages = [];
+  const missingPages = [];
+
+  seoAgencyRequestedPages.forEach((requestedPage) => {
+    const found = pages.find(
+      (page) => page.publishedPath === requestedPage.url
+    );
+    if (found) {
+      foundPages.push({ requested: requestedPage, current: found });
+    } else {
+      missingPages.push(requestedPage);
+    }
+  });
+
+  console.log("\n📋 SEO Agency Requirements Analysis:");
+  console.log(
+    `✅ Pages found: ${foundPages.length}/${seoAgencyRequestedPages.length}`
+  );
+  if (missingPages.length > 0) {
+    console.log(`❌ Missing pages: ${missingPages.length}`);
+    missingPages.forEach((page) =>
+      console.log(`   - ${page.title} (${page.url})`)
+    );
+  }
+
+  const extraPages = pages.filter(
+    (page) =>
+      !seoAgencyRequestedPages.some((req) => req.url === page.publishedPath)
+  );
+  if (extraPages.length > 0) {
+    console.log(
+      `\n⚠️  Extra pages (not mentioned by SEO agency): ${extraPages.length}`
+    );
+  }
+}
+
+/**
+ * Sync Webflow Page Titles
+ * Use this function to update page titles from Webflow MCP API
+ * Usage: Call syncWebflowTitles(webflowPagesData) after fetching from MCP
+ */
+function syncWebflowTitles(webflowPagesData) {
+  // webflowPagesData should be an array of { id, title, publishedPath }
+  console.log("\n🔄 Syncing Webflow titles...");
+
+  webflowPagesData.forEach((webflowPage) => {
+    const pageIndex = pages.findIndex(
+      (p) =>
+        p.id === webflowPage.id || p.publishedPath === webflowPage.publishedPath
+    );
+    if (pageIndex !== -1) {
+      const oldTitle = pages[pageIndex].title;
+      pages[pageIndex].title = webflowPage.title;
+      console.log(`✅ Updated: ${oldTitle} → ${webflowPage.title}`);
+    } else {
+      console.log(
+        `⚠️  Page not found: ${webflowPage.title} (${webflowPage.publishedPath})`
+      );
+    }
+  });
+
+  console.log(
+    "\n✅ Sync complete! Run generate-all-schemas.js to regenerate files."
+  );
+}
+
+/**
+ * Compare with Webflow Pages
+ * Use MCP Webflow API to fetch all pages and compare with script
+ * Usage: Call compareWithWebflow(webflowPagesData) after fetching from MCP
+ */
+function compareWithWebflow(webflowPagesData) {
+  // webflowPagesData should be an array of { id, title, publishedPath, draft, archived }
+  const publishedPages = webflowPagesData.filter(
+    (p) => !p.draft && !p.archived
+  );
+
+  console.log("\n🔍 Comparing with Webflow pages...");
+  console.log(`Webflow published pages: ${publishedPages.length}`);
+  console.log(`Pages in script: ${pages.length}`);
+
+  const missingInScript = publishedPages.filter(
+    (wp) =>
+      !pages.some((p) => p.id === wp.id || p.publishedPath === wp.publishedPath)
+  );
+
+  if (missingInScript.length > 0) {
+    console.log(
+      `\n❌ Pages in Webflow but missing in script: ${missingInScript.length}`
+    );
+    missingInScript.slice(0, 10).forEach((page) => {
+      console.log(`   - ${page.title} (${page.publishedPath})`);
+    });
+    if (missingInScript.length > 10) {
+      console.log(`   ... and ${missingInScript.length - 10} more`);
+    }
+  }
+
+  const missingInWebflow = pages.filter(
+    (p) =>
+      !publishedPages.some(
+        (wp) => wp.id === p.id || wp.publishedPath === p.publishedPath
+      )
+  );
+
+  if (missingInWebflow.length > 0) {
+    console.log(
+      `\n⚠️  Pages in script but not found in Webflow: ${missingInWebflow.length}`
+    );
+    missingInWebflow.forEach((page) => {
+      console.log(`   - ${page.title} (${page.publishedPath})`);
+    });
+  }
+}
+
+// Uncomment to run utility functions:
+// analyzeSEOAgencyRequirements();
+// syncWebflowTitles([...]); // Pass Webflow pages data from MCP
+// compareWithWebflow([...]); // Pass Webflow pages data from MCP

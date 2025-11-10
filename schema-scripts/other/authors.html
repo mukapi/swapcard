@@ -3,22 +3,25 @@
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": "WebPage",
-      "@id": "https://www.swapcard.com/contact#webpage",
-      "url": "https://www.swapcard.com/contact",
-      "name": "Contact Us | Let's talk!",
+      "@type": "CollectionPage",
+      "@id": "https://www.swapcard.com/authors#webpage",
+      "url": "https://www.swapcard.com/authors",
+      "name": "Authors | Swapcard",
       "inLanguage": "en",
-      "description": "Have a question or suggestion? Contact the Swapcard team anytime—we're here to help with your event needs & platform support. Contact us for more information!",
+      "description": "Explore all Swapcard authors and their latest articles on event technology, attendee engagement, and ROI.",
       "isPartOf": {
         "@id": "https://www.swapcard.com/#website"
       },
       "about": {
         "@id": "https://www.swapcard.com/#org"
+      },
+      "mainEntity": {
+        "@id": "https://www.swapcard.com/authors#itemlist"
       }
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://www.swapcard.com/contact#breadcrumb",
+      "@id": "https://www.swapcard.com/authors#breadcrumb",
       "itemListElement": [
         {
           "@type": "ListItem",
@@ -29,10 +32,18 @@
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Contact",
-          "item": "https://www.swapcard.com/contact"
+          "name": "Authors",
+          "item": "https://www.swapcard.com/authors"
         }
       ]
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://www.swapcard.com/authors#itemlist",
+      "name": "Swapcard Authors",
+      "itemListOrder": "https://schema.org/ItemListOrderAscending",
+      "numberOfItems": 0,
+      "itemListElement": []
     },
     {
       "@type": "Organization",
