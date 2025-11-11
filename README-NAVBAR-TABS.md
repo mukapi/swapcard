@@ -16,8 +16,8 @@ Link 0 → Pane 0 → Link 1 → Pane 1 → Link 2 → Pane 2 → ...
 
 ## 📁 Fichiers
 
-- `navbar-tabs.js` - Script JavaScript principal avec injection automatique du CSS
-- ~~`navbar-tabs.css`~~ - **Supprimé** : Le CSS est maintenant injecté automatiquement par le script JS
+- `navbar-tabs.js` - Script JavaScript qui réorganise les tabs et gère les clics
+- `navbar-tabs.css` - Styles CSS pour l'affichage mobile
 
 ## 🏗️ Structure HTML Webflow
 
@@ -38,142 +38,90 @@ Link 0 → Pane 0 → Link 1 → Pane 1 → Link 2 → Pane 2 → ...
 
 ## 🔧 Solution
 
-### Approche hybride : CSS + Manipulation DOM
+### Comment ça marche
 
-Le script utilise une approche en deux étapes :
+1. **JavaScript** : Sur mobile/tablette (≤991px), le script :
 
-1. **Injection automatique du CSS** : Le script vérifie si le fichier CSS est chargé, sinon il l'injecte automatiquement dans la page
-2. **Détection de `display: contents`** : Le script teste si `display: contents` fonctionne pour "dissoudre" les containers
-3. **Fallback DOM** : Si `display: contents` ne fonctionne pas, le script déplace les panes directement après leurs links dans le DOM
+   - Déplace les panes dans le menu après leurs links correspondants
+   - Remplace le système de tabs Webflow par un système custom qui gère les clics manuellement
+   - Masque le container `.nav_dropdown_content` (les panes sont maintenant dans le menu)
 
-### CSS injecté automatiquement
+2. **CSS** : Assure que :
+
+   - Le container principal est en `flex-direction: column`
+   - Le menu affiche les éléments en colonne (links et panes alternés)
+   - Le content est masqué sur mobile
+
+3. **Desktop** : Sur desktop (>991px), le script restaure la structure originale et Webflow reprend le contrôle
+
+### Avantages
+
+- ✅ **Fonctionne** : Testé et validé avec plusieurs clics
+- ✅ **Réversible** : Retour automatique à la structure normale sur desktop
+- ✅ **Préserve Webflow** : Le système Webflow fonctionne toujours sur desktop
+- ✅ **Minimal** : Manipulation DOM minimale, seulement sur mobile
+
+## 📝 Utilisation
+
+1. **Intégrer le CSS** : Ajouter `navbar-tabs.css` à votre page Webflow
+2. **Intégrer le JS** : Ajouter `navbar-tabs.js` à votre page Webflow (avant la fermeture de `</body>`)
+3. **C'est tout !** : La réorganisation se fait automatiquement sur mobile/tablette (≤991px)
+
+## 🎨 Personnalisation
+
+### Changer le breakpoint
+
+Modifiez la media query dans `navbar-tabs.css` et dans `navbar-tabs.js` :
+
+**CSS** :
 
 ```css
 @media (max-width: 991px) {
-  .mobile-tabs-reorganized {
-    display: flex !important;
-    flex-direction: column !important;
-    flex-wrap: nowrap !important;
-  }
-
-  .mobile-tabs-reorganized .nav_dropdown_menu {
-    display: contents !important;
-  }
-
-  .mobile-tabs-reorganized .nav_dropdown_content {
-    display: contents !important;
-  }
-
-  .mobile-tabs-reorganized .nav_dropdown_link {
-    order: calc(var(--tab-order, 0) * 2) !important;
-    flex-shrink: 0 !important;
-  }
-
-  .mobile-tabs-reorganized .nav_dropdown_pane {
-    order: calc(var(--tab-order, 0) * 2 + 1) !important;
-    flex-shrink: 0 !important;
-  }
+  /* Changez 991px selon vos besoins */
 }
 ```
 
-### Manipulation DOM (fallback)
-
-Si `display: contents` ne fonctionne pas, le script déplace les panes directement après leurs links :
+**JS** :
 
 ```javascript
-// Déplacer chaque pane juste après son link dans .nav_dropdown_menu
-linkPanePairs.forEach(({ link, pane }) => {
-  const linkParent = link.parentElement; // .nav_dropdown_menu
-  linkParent.insertBefore(pane, link.nextSibling);
-});
+const mediaQuery = window.matchMedia("(max-width: 991px)"); // Changez 991px
 ```
 
-## ✅ Fonctionnalités
+## 🔍 Comment ça fonctionne techniquement
 
-1. ✅ **Injection automatique du CSS** - Plus besoin de charger un fichier CSS séparé
-2. ✅ **Détection automatique** - Le script détecte si `display: contents` fonctionne
-3. ✅ **Fallback DOM** - Si CSS ne suffit pas, manipulation DOM minimale
-4. ✅ **Fonctions de débogage** - `window.debugNavbarTabs()` et `window.testDisplayContents()`
-5. ✅ **Restauration desktop** - Retour automatique à la structure originale pour >991px
-6. ✅ **Préservation Webflow** - Les tabs Webflow continuent de fonctionner normalement
+1. **Mobile (≤991px)** :
 
-## 🔍 Diagnostic
+   - Le script détecte la taille d'écran via `matchMedia`
+   - Il déplace les panes dans `.nav_dropdown_menu` après leurs links correspondants
+   - Il attache des handlers de clic custom qui remplacent Webflow
+   - Le CSS masque `.nav_dropdown_content` et affiche le menu en colonne
 
-### Fonctions de débogage disponibles dans la console :
+2. **Desktop (>991px)** :
+   - Le script restaure les panes dans `.nav_dropdown_content`
+   - Il retire les handlers custom (Webflow reprend le contrôle)
+   - Le CSS ne s'applique pas (media query)
 
-```javascript
-// Diagnostic complet de la structure
-window.debugNavbarTabs()
+## ⚠️ Limitations
 
-// Test spécifique pour display: contents
-window.testDisplayContents()
-```
+- ⚠️ **JavaScript requis** : Contrairement à une solution CSS pure, cette solution nécessite JavaScript
+- ⚠️ **Remplace Webflow sur mobile** : Le système de tabs Webflow est désactivé sur mobile, remplacé par un système custom
 
-### Ce qu'il faut vérifier :
+## 🐛 Dépannage
 
-1. **Media query** : La fenêtre est-elle bien ≤991px ?
-2. **Classe appliquée** : `.mobile-tabs-reorganized` est-elle ajoutée au container ?
-3. **CSS injecté** : Le message `[Navbar Tabs] ✅ CSS injecté automatiquement` apparaît-il ?
-4. **Display contents** : Les links/panes sont-ils enfants directs du container ?
-5. **Manipulation DOM** : Si display: contents ne fonctionne pas, les panes sont-ils déplacés ?
+### Les tabs ne se réorganisent pas ?
 
-## 📝 Logs à vérifier dans la console
+1. Vérifier que le JS est bien chargé (console : `[Navbar Tabs] Script chargé`)
+2. Vérifier que la largeur de la fenêtre est bien ≤991px
+3. Vérifier dans les DevTools que les panes sont bien dans `.nav_dropdown_menu`
 
-Le script affiche des logs détaillés :
-- `[Navbar Tabs] Script chargé`
-- `[Navbar Tabs] ✅ CSS injecté automatiquement` (si le CSS n'est pas déjà chargé)
-- `[Navbar Tabs] 🔄 Réorganisation des tabs pour mobile/tablette`
-- `[Navbar Tabs] 🔍 Test display: contents - Enfants directs contenant links/panes: X`
-- `[Navbar Tabs] 🔍 Test display: contents (après CSS) - Enfants directs contenant links/panes: X`
-- `[Navbar Tabs] ⚠️ display: contents ne fonctionne pas, manipulation DOM minimale nécessaire` OU `✅ display: contents fonctionne`
-- `[Navbar Tabs] ✅ Pane X inséré après son link dans le DOM` (si manipulation DOM)
+### Les clics ne fonctionnent pas ?
 
-## 🎯 Utilisation
-
-1. **Intégrer le script** : Ajouter `navbar-tabs.js` à votre page Webflow
-2. **Aucun CSS requis** : Le CSS est injecté automatiquement par le script
-3. **Responsive automatique** : Le script détecte automatiquement les changements de taille d'écran
-4. **Débogage** : Utiliser `window.debugNavbarTabs()` dans la console pour diagnostiquer
-
-## ⚠️ Contraintes
-
-- **Ne pas casser les tabs Webflow** - Le système de tabs natif doit continuer à fonctionner
-- **Manipulation DOM minimale** - Éviter de trop manipuler le DOM pour ne pas casser Webflow
-- **Réversible** - Doit pouvoir restaurer la structure originale pour desktop (>991px)
-
-## 🔄 Restauration Desktop
-
-Quand on revient en desktop (>991px), le script :
-1. Retire la classe `.mobile-tabs-reorganized`
-2. Remet les panes dans `.nav_dropdown_content` (si déplacés)
-3. Retire les attributs `data-tab-index` et `--tab-order`
-4. Retire le CSS injecté (si injecté automatiquement)
+1. Vérifier dans la console qu'il n'y a pas d'erreurs JavaScript
+2. Vérifier que les handlers sont bien attachés (console : `[Navbar Tabs] ✅ Handlers de clic attachés`)
+3. Vérifier que les panes sont bien associés aux links (même `data-w-tab`)
 
 ## 📚 Ressources
 
 - **Page de test** : https://staging-swapcard.webflow.io/work-in-progress/new-navigation
 - Les tabs Webflow utilisent `data-w-tab` pour lier links et panes
 - Les tabs actifs ont la classe `w--current` (links) et `w--tab-active` (panes)
-- Le script utilise `matchMedia` pour détecter les changements de taille d'écran
-
-## 🐛 Dépannage
-
-### Le script ne fonctionne pas ?
-
-1. Vérifier que la console ne montre pas d'erreurs
-2. Vérifier que la classe `.mobile-tabs-reorganized` est bien ajoutée au container
-3. Exécuter `window.debugNavbarTabs()` pour voir la structure
-4. Vérifier que la largeur de la fenêtre est bien ≤991px
-5. Vérifier les logs dans la console pour identifier où ça bloque
-
-### Les panes ne sont pas réorganisés ?
-
-1. Vérifier si `display: contents` fonctionne avec `window.testDisplayContents()`
-2. Si non, vérifier que la manipulation DOM se fait (logs `✅ Pane X inséré`)
-3. Vérifier que les panes sont bien dans le menu après manipulation DOM
-
-## 🚀 Améliorations futures possibles
-
-- Support pour plusieurs containers de tabs sur la même page
-- Animation lors de la réorganisation
-- Support pour d'autres breakpoints personnalisables
