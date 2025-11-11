@@ -50,75 +50,75 @@ const reorganizeTabs = () => {
   });
 
   // Gérer les clics manuellement pour remplacer Webflow sur mobile
-  if (!clickHandlersAttached) {
-    // Créer un nouveau mapping avec les panes (qui ne changent pas)
-    const newLinkPaneMap = new Map();
-    links.forEach((link) => {
-      const dataWTab = link.getAttribute("data-w-tab");
-      const pane = linkPaneMap.get(link);
-      if (pane) {
-        newLinkPaneMap.set(dataWTab, pane);
-      }
-    });
+  // Créer un nouveau mapping avec les panes (qui ne changent pas)
+  const newLinkPaneMap = new Map();
+  links.forEach((link) => {
+    const dataWTab = link.getAttribute("data-w-tab");
+    const pane = linkPaneMap.get(link);
+    if (pane) {
+      newLinkPaneMap.set(dataWTab, pane);
+    }
+  });
 
-    // Retirer les anciens handlers en clonant les links
-    links.forEach((link) => {
-      const newLink = link.cloneNode(true);
-      link.parentNode.replaceChild(newLink, link);
-    });
+  // Retirer les anciens handlers en clonant les links
+  links.forEach((link) => {
+    const newLink = link.cloneNode(true);
+    link.parentNode.replaceChild(newLink, link);
+  });
 
-    // Récupérer les nouveaux links après clonage
-    const newLinks = Array.from(
-      container.querySelectorAll(".nav_dropdown_link")
+  // Récupérer les nouveaux links après clonage
+  const newLinks = Array.from(container.querySelectorAll(".nav_dropdown_link"));
+
+  newLinks.forEach((link) => {
+    const dataWTab = link.getAttribute("data-w-tab");
+    const pane = newLinkPaneMap.get(dataWTab);
+
+    if (!pane) return;
+
+    // Sauvegarder le href original
+    const originalHref = link.getAttribute("href");
+    if (originalHref) {
+      link.dataset.originalHref = originalHref;
+    }
+
+    // Retirer le href pour éviter la navigation
+    link.removeAttribute("href");
+    link.style.cursor = "pointer";
+
+    link.addEventListener(
+      "click",
+      (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+
+        // Retirer w--current de tous les links
+        newLinks.forEach((l) => {
+          l.classList.remove("w--current");
+          l.setAttribute("aria-selected", "false");
+          l.setAttribute("tabindex", "-1");
+        });
+
+        // Ajouter w--current au link cliqué
+        link.classList.add("w--current");
+        link.setAttribute("aria-selected", "true");
+        link.setAttribute("tabindex", "0");
+
+        // Masquer tous les panes
+        panes.forEach((p) => {
+          p.classList.remove("w--tab-active");
+          p.style.display = "none";
+        });
+
+        // Afficher le pane correspondant
+        if (pane) {
+          pane.classList.add("w--tab-active");
+          pane.style.display = "block";
+        }
+      },
+      true // Use capture phase
     );
-
-    newLinks.forEach((link) => {
-      const dataWTab = link.getAttribute("data-w-tab");
-      const pane = newLinkPaneMap.get(dataWTab);
-
-      if (!pane) return;
-
-      // Retirer le href pour éviter la navigation
-      link.removeAttribute("href");
-      link.style.cursor = "pointer";
-
-      link.addEventListener(
-        "click",
-        (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          e.stopImmediatePropagation();
-
-          // Retirer w--current de tous les links
-          newLinks.forEach((l) => {
-            l.classList.remove("w--current");
-            l.setAttribute("aria-selected", "false");
-            l.setAttribute("tabindex", "-1");
-          });
-
-          // Ajouter w--current au link cliqué
-          link.classList.add("w--current");
-          link.setAttribute("aria-selected", "true");
-          link.setAttribute("tabindex", "0");
-
-          // Masquer tous les panes
-          panes.forEach((p) => {
-            p.classList.remove("w--tab-active");
-            p.style.display = "none";
-          });
-
-          // Afficher le pane correspondant
-          if (pane) {
-            pane.classList.add("w--tab-active");
-            pane.style.display = "block";
-          }
-        },
-        true // Use capture phase
-      );
-    });
-
-    clickHandlersAttached = true;
-  }
+  });
 
   // Initialiser : afficher le premier pane
   const currentLinks = Array.from(
@@ -165,57 +165,82 @@ const reorganizeTabs = () => {
 
 // Restaurer la structure originale pour desktop
 const restoreTabs = () => {
-  if (!tabsReorganized) {
-    return;
-  }
-
   const container = document.querySelector(".nav_dropdown_tabs");
   if (!container) return;
 
-  const menu = container.querySelector(".nav_dropdown_menu");
-  const content = container.querySelector(".nav_dropdown_content");
-  const panes = Array.from(container.querySelectorAll(".nav_dropdown_pane"));
+  // Si on a déjà réorganisé pour mobile, restaurer la structure
+  if (tabsReorganized) {
+    const menu = container.querySelector(".nav_dropdown_menu");
+    const content = container.querySelector(".nav_dropdown_content");
+    const panes = Array.from(container.querySelectorAll(".nav_dropdown_pane"));
 
-  if (!menu || !content) return;
+    if (!menu || !content) return;
 
-  // Remettre les panes dans content
-  panes.forEach((pane) => {
-    if (pane.parentElement === menu) {
-      content.appendChild(pane);
-    }
-    // Retirer les styles inline
-    pane.style.display = "";
+    // Remettre les panes dans content
+    panes.forEach((pane) => {
+      if (pane.parentElement === menu) {
+        content.appendChild(pane);
+      }
+      // Retirer les styles inline
+      pane.style.display = "";
+    });
+
+    // Retirer les handlers de clic et restaurer les hrefs
+    const links = Array.from(container.querySelectorAll(".nav_dropdown_link"));
+    links.forEach((link) => {
+      const newLink = link.cloneNode(true);
+
+      // Restaurer le href original
+      const originalHref = link.dataset.originalHref;
+      if (originalHref) {
+        newLink.setAttribute("href", originalHref);
+        delete newLink.dataset.originalHref;
+      }
+
+      link.parentNode.replaceChild(newLink, link);
+    });
+
+    clickHandlersAttached = false;
+    tabsReorganized = false;
+  }
+
+  // Toujours ajouter le hover pour desktop (même au premier chargement)
+  const freshLinks = Array.from(
+    container.querySelectorAll(".nav_dropdown_link")
+  );
+  freshLinks.forEach((link) => {
+    link.addEventListener("mouseenter", () => {
+      link.click();
+    });
   });
-
-  // Retirer les handlers de clic (Webflow reprend le contrôle)
-  const links = Array.from(container.querySelectorAll(".nav_dropdown_link"));
-  links.forEach((link) => {
-    // Cloner le link pour retirer les listeners
-    const newLink = link.cloneNode(true);
-    link.parentNode.replaceChild(newLink, link);
-  });
-
-  clickHandlersAttached = false;
-  tabsReorganized = false;
 };
 
 // Gérer le responsive
 const handleTabsLayout = () => {
   const mediaQuery = window.matchMedia("(max-width: 991px)");
+  let resizeTimeout;
 
   const handleMediaChange = (e) => {
+    // Debounce pour éviter les appels multiples pendant le resize
+    clearTimeout(resizeTimeout);
 
-    if (e.matches) {
-      // Mobile/tablette : réorganiser
-      reorganizeTabs();
-    } else {
-      // Desktop : restaurer
-      restoreTabs();
-    }
+    resizeTimeout = setTimeout(() => {
+      if (e.matches) {
+        // Mobile/tablette : réorganiser
+        reorganizeTabs();
+      } else {
+        // Desktop : restaurer
+        restoreTabs();
+      }
+    }, 150);
   };
 
-  // Initialiser au chargement
-  handleMediaChange(mediaQuery);
+  // Initialiser au chargement (sans debounce)
+  if (mediaQuery.matches) {
+    reorganizeTabs();
+  } else {
+    restoreTabs();
+  }
 
   // Écouter les changements
   mediaQuery.addEventListener("change", handleMediaChange);
