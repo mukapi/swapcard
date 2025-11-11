@@ -92,6 +92,9 @@ const reorganizeTabs = () => {
         e.stopPropagation();
         e.stopImmediatePropagation();
 
+        // Vérifier si ce tab est déjà actif (comportement accordéon)
+        const isActive = link.classList.contains("w--current");
+
         // Retirer w--current de tous les links
         newLinks.forEach((l) => {
           l.classList.remove("w--current");
@@ -99,66 +102,46 @@ const reorganizeTabs = () => {
           l.setAttribute("tabindex", "-1");
         });
 
-        // Ajouter w--current au link cliqué
-        link.classList.add("w--current");
-        link.setAttribute("aria-selected", "true");
-        link.setAttribute("tabindex", "0");
-
         // Masquer tous les panes
         panes.forEach((p) => {
           p.classList.remove("w--tab-active");
           p.style.display = "none";
         });
 
-        // Afficher le pane correspondant
-        if (pane) {
-          pane.classList.add("w--tab-active");
-          pane.style.display = "block";
+        // Si le tab n'était pas actif, l'ouvrir (comportement accordéon)
+        if (!isActive) {
+          link.classList.add("w--current");
+          link.setAttribute("aria-selected", "true");
+          link.setAttribute("tabindex", "0");
+
+          // Afficher le pane correspondant
+          if (pane) {
+            pane.classList.add("w--tab-active");
+            pane.style.display = "block";
+          }
         }
       },
       true // Use capture phase
     );
   });
 
-  // Initialiser : afficher le premier pane
+  // Initialiser : aucun tab sélectionné par défaut sur mobile
   const currentLinks = Array.from(
     container.querySelectorAll(".nav_dropdown_link")
   );
-  const firstLink = currentLinks[0];
 
-  // Utiliser le mapping par data-w-tab
-  const firstPane = firstLink
-    ? (() => {
-        const dataWTab = firstLink.getAttribute("data-w-tab");
-        return linkPaneMap.get(
-          Array.from(links).find(
-            (l) => l.getAttribute("data-w-tab") === dataWTab
-          )
-        );
-      })()
-    : null;
+  // Masquer tous les panes
+  panes.forEach((p) => {
+    p.classList.remove("w--tab-active");
+    p.style.display = "none";
+  });
 
-  if (firstLink && firstPane) {
-    // Masquer tous les panes
-    panes.forEach((p) => {
-      p.classList.remove("w--tab-active");
-      p.style.display = "none";
-    });
-
-    // Afficher le premier pane
-    firstPane.classList.add("w--tab-active");
-    firstPane.style.display = "block";
-
-    // Activer le premier link
-    currentLinks.forEach((l) => {
-      l.classList.remove("w--current");
-      l.setAttribute("aria-selected", "false");
-      l.setAttribute("tabindex", "-1");
-    });
-    firstLink.classList.add("w--current");
-    firstLink.setAttribute("aria-selected", "true");
-    firstLink.setAttribute("tabindex", "0");
-  }
+  // Désactiver tous les links
+  currentLinks.forEach((l) => {
+    l.classList.remove("w--current");
+    l.setAttribute("aria-selected", "false");
+    l.setAttribute("tabindex", "-1");
+  });
 
   tabsReorganized = true;
 };
