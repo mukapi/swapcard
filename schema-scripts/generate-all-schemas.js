@@ -279,6 +279,67 @@ const pages = [
     publishedPath: "/features/widgets",
     category: "features",
   },
+  // 5 nouvelles pages Features ajoutées (décembre 2025)
+  {
+    id: "64d3914e6761bd389818d671",
+    title: "Community builder",
+    slug: "community-builder",
+    seo: {
+      title: "Build Event Communities Year-Round | Swapcard",
+      description:
+        "Keep your audience engaged all year. Host webinars, foster networking, and monetize your event community with Swapcard's Community Builder.",
+    },
+    publishedPath: "/features/community-builder",
+    category: "features",
+  },
+  {
+    id: "64d3914e6761bd389818d68b",
+    title: "Analytics and Data reporting",
+    slug: "event-analytics",
+    seo: {
+      title: "Event Analytics & Data Reporting | Run data-driven events",
+      description:
+        "Capture and monitor event analytics in one place, identify marketing signals, and unlock real business insights to improve your event outcomes.",
+    },
+    publishedPath: "/features/event-analytics",
+    category: "features",
+  },
+  {
+    id: "693063882b686d81ab4e6f72",
+    title: "Swapcard Virtual Event AI Assistant",
+    slug: "event-ai-assistant",
+    seo: {
+      title: "AI Assistant for Events: Smarter Navigation & Lead Capture | Swapcard",
+      description:
+        "Enhance attendee experience and exhibitor ROI with Swapcard's AI-powered event assistant. Deliver smart support, personalized recommendations, and streamlined operations across every event touchpoint.",
+    },
+    publishedPath: "/features/event-ai-assistant",
+    category: "features",
+  },
+  {
+    id: "69304f595c9b323b1f9c8dde",
+    title: "Exhibitor Marketplace",
+    slug: "exhibitor-marketplace",
+    seo: {
+      title: "Sell exhibitor add-ons and services effortlessly | Swapcard",
+      description:
+        "Launch a self-service marketplace for exhibitors. Sell lead capture, networking tools, and custom services with automated payments and instant activation.",
+    },
+    publishedPath: "/features/exhibitor-marketplace",
+    category: "features",
+  },
+  {
+    id: "691f30c687a8e847503cea23",
+    title: "Branded & White Label Event Apps",
+    slug: "branded-white-label-event-apps",
+    seo: {
+      title: "Branded Event Apps & White-Label Platform | Swapcard",
+      description:
+        "Launch branded web & mobile event apps with segment-specific UX, custom domains, and publisher control. Built for trade shows, conferences & associations.",
+    },
+    publishedPath: "/features/branded-white-label-event-apps",
+    category: "features",
+  },
   // 4. Attendee Networking & Engagement (Section 4.3 - Solution Page)
   {
     id: "66e994786b991285d48b518b",
@@ -707,19 +768,33 @@ function getSchemaType(page) {
   // Category-based schemas
   switch (page.category) {
     case "features":
-      // Features pages use Product (not Service!) - as per README line 1033
-      return {
-        "@type": "Product",
-        "@id": `https://www.swapcard.com${page.publishedPath}#product`,
-        name: `${page.title} | Swapcard`, // H1 + brand name as per Zoé's note (line 828)
-        description: page.seo.description,
-        brand: { "@type": "Brand", name: "Swapcard" },
-        image: [
-          "https://cdn.prod.website-files.com/6341448fda79c92372b010a4/63502c47c8e7bdfa7c25aefe_swapcardLogo.svg",
-        ],
-        url: getPageUrl(page.publishedPath),
-        category: "Event Management Software",
-      };
+      // Seule la page event-registration-software garde Product (car elle a des avis/notes)
+      // Les autres pages features utilisent WebPage pour éviter les warnings Google
+      // Source: Recommandation SEO - Product nécessite offers, aggregateRating ou review
+      if (page.publishedPath === "/features/event-registration-software") {
+        return {
+          "@type": "Product",
+          "@id": `https://www.swapcard.com${page.publishedPath}#product`,
+          name: `${page.title} | Swapcard`,
+          description: page.seo.description,
+          brand: { "@type": "Brand", name: "Swapcard" },
+          image: [
+            "https://cdn.prod.website-files.com/6341448fda79c92372b010a4/63502c47c8e7bdfa7c25aefe_swapcardLogo.svg",
+          ],
+          url: getPageUrl(page.publishedPath),
+          category: "Event Management Software",
+          // Note G2 affichée sur la page - requis pour Product schema
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: "4.6",
+            bestRating: "5",
+            worstRating: "1",
+            ratingCount: "394",
+          },
+        };
+      }
+      // Autres pages features → WebPage (pas de Product sans avis)
+      return null; // WebPage est déjà ajouté par défaut dans generatePageSchema()
 
     case "solutions":
       // Solutions pages use Service (correct!)
