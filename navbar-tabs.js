@@ -280,6 +280,7 @@ const waitForWebflowTabs = (callback, maxAttempts = 20) => {
     );
 
     if (links.length > 0 && panes.length > 0 && hasWebflowClasses) {
+    if (links.length > 0 && panes.length > 0 && hasWebflowClasses) {
       callback();
     } else if (attempts < maxAttempts) {
       setTimeout(checkTabs, 100);
